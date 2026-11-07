@@ -1,79 +1,100 @@
 # GPT-2 From Scratch
 
-### An Independent PyTorch Implementation of a Decoder-Only Transformer
+**A decoder-only transformer implemented in PyTorch**
 
-This project is my independent implementation of a GPT-2-inspired language model using Python and PyTorch. I developed it to deepen my understanding of transformer architecture, particularly the mathematical principles and computational mechanisms underlying modern large language models.
+An independent implementation of a GPT-2-inspired language model, developed to explore the mathematics and computational architecture underlying modern large language models.
 
-My broader interest lies in applying machine learning to computational biology and understanding complex biological systems, particularly neurodegenerative diseases.
+My broader motivation is to understand how machine learning techniques can be applied to computational biology, particularly the study of neurodegenerative diseases.
 
-## 1. Project Overview
+## Project Overview
 
-Rather than relying on a pretrained language model, I implemented the core components of a decoder-only transformer architecture to understand how information flows through the network and how language models generate sequences of tokens.
+This project implements the core components of a GPT-style transformer without relying on pretrained model weights or high-level transformer libraries.
 
-The implementation includes:
-
-- Tokenization and token embeddings
-- Positional embeddings
-- Masked multi-head self-attention
-- Transformer blocks
+**Implemented components:**
+- Token and positional embeddings
+- Causally masked multi-head self-attention
 - Feed-forward neural networks
-- Autoregressive token generation
+- Layer normalization and residual connections
+- Stacked transformer blocks
+- Autoregressive text generation using greedy decoding
 
-## 2. Transformer Architecture
+## Repository Structure
 
-The model follows a GPT-2-inspired decoder-only architecture.
+```text
+src/llm/
+├── model.py       # Transformer architecture and configuration
+├── generate.py    # Autoregressive token generation
+├── main.py        # Model initialization and demonstration
+└── __init__.py    # Package initialization
+```
 
-### Token and Positional Embeddings
+## Getting Started
 
-Input tokens are converted into learned vector representations, with positional information added to encode their ordering within a sequence.
+### Requirements
 
-### Masked Multi-Head Self-Attention
+- Python 3.13
+- uv (Python package and environment manager)
 
-The self-attention mechanism allows tokens to incorporate information from preceding tokens. Causal masking prevents each token from accessing future positions during prediction.
+### Installation
 
-Multiple attention heads enable the model to learn different relationships between tokens.
+Clone the repository:
 
-### Transformer Blocks
+```bash
+git clone https://github.com/mmohoric73/gpt2_from_scratch.git
+cd gpt2_from_scratch
+```
 
-Transformer blocks combine self-attention with feed-forward neural networks, residual connections, and layer normalization to progressively transform token representations.
+Install dependencies:
 
-### Autoregressive Generation
+```bash
+uv sync
+```
 
-The model generates text one token at a time, using the previously generated sequence as context for predicting the next token.
+### Run the Model
 
-## 3. Technologies
+```bash
+uv run llm
+```
 
-- **Language:** Python
-- **Deep Learning Framework:** PyTorch
-- **Architecture:** GPT-2-inspired decoder-only transformer
+The program initializes the transformer with random parameters, tokenizes an example prompt, and generates additional tokens autoregressively.
 
-## 4. Current Development Status
+Because the model is untrained, its output is not expected to be coherent.
 
-The model's core architecture and autoregressive generation functionality have been implemented.
+## How the Architecture Works
 
-**The model has not yet been trained.** Its parameters remain randomly initialized, so generated text is not expected to exhibit meaningful linguistic structure.
+**1. Embeddings:** Input token IDs are converted into continuous vectors, with positional embeddings encoding sequence order.
 
-The current implementation demonstrates the computational mechanics of token generation rather than the language capabilities of a trained model.
+**2. Multi-head self-attention:** Each token incorporates information from preceding positions. A causal mask prevents the model from attending to future tokens.
 
-## 5. Future Development
+**3. Transformer blocks:** Attention outputs pass through feed-forward layers, residual connections, and normalization operations.
 
-Planned improvements include:
+**4. Output predictions:** The model produces a set of scores, called logits, over the token vocabulary for each position.
 
-- Training the model on a text dataset
-- Measuring training and validation loss
-- Evaluating generated text after training
-- Experimenting with architectural configurations and hyperparameters
-- Exploring applications of transformer architectures to biological sequence and textual data
+**5. Autoregressive generation:** The highest-scoring next token is appended to the sequence, and the process repeats.
 
-## 6. Motivation
+## Current Status
 
-I developed this project as part of my independent exploration of machine learning and its potential applications in scientific research.
+**Implemented and executed:** The transformer architecture and autoregressive generation pipeline.
 
-My long-term goal is to contribute to computational approaches for understanding complex biological systems, particularly the molecular mechanisms underlying neurodegenerative diseases.
+**Not yet implemented:** Model training and quantitative performance evaluation.
 
-Building this architecture from the ground up has provided a foundation for studying more advanced machine learning methods and their applications in computational biology.
+The parameters remain randomly initialized. Consequently, this project currently demonstrates transformer computation and token generation, rather than learned language modeling capabilities.
+
+## Next Steps
+
+- Implement a training loop with cross-entropy loss and gradient-based optimization
+- Train a smaller configuration on a manageable text dataset
+- Measure training and validation loss
+- Add unit tests for attention masking, tensor dimensions, and generation
+- Explore applications of language models to biological data
+
+## Motivation
+
+I developed this project to build a deeper understanding of machine learning beyond using pretrained models.
+
+As an MIT undergraduate interested in computational biology and neuroscience, I hope to apply these foundations to scientific problems involving gene function, molecular interactions, and neurodegenerative disease.
 
 ---
 
-**Author:** Michael Mohoric
+**Michael Mohoric**
 Massachusetts Institute of Technology | Class of 2030
