@@ -5,6 +5,8 @@ __pycache__/
 
 # Virtual environments
 .venv/
+.venv-test/
+.venv-old/
 venv/
 
 # Environment variables and secrets
@@ -22,3 +24,6 @@ checkpoints/
 
 # Mac system files
 .DS_Store
+
+# Diagnostic logs
+*.log
